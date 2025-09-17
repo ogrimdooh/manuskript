@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # --!-- coding: utf8 --!--
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QModelIndex, Qt, QAbstractItemModel, QVariant
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 
@@ -246,6 +247,52 @@ class characterModel(QAbstractItemModel, searchableModel):
             self.beginRemoveRows(c.index(), r, r)
             c.infos.pop(r)
             self.endRemoveRows()
+
+    def copyCharacterInfo(self, ID, copyValues):
+        c = self.getCharacterByID(ID)
+
+        copiedInfos = []
+        for idx in c.infos:
+            if copyValues:
+                copiedInfos.append((idx.description, idx.value))
+            else:
+                copiedInfos.append((idx.description, None))
+
+        clipboard = QApplication.clipboard()
+        clipboard.setText(repr(copiedInfos))
+
+    def pasteCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        try:
+            pastedInfos = eval(QApplication.clipboard().text())
+            for description, value in pastedInfos:
+                self.addCharacterInfo(ID, description, value)
+        except:
+            pass
+
+    def pasteNotAddedCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        try:
+            pastedInfos = eval(QApplication.clipboard().text())
+            for description, value in pastedInfos:
+                addVal = True
+                for idx in c.infos:
+                    if idx.description == description:
+                        addVal = False
+                        break
+                if addVal:
+                    self.addCharacterInfo(ID, description, value)
+        except:
+            pass
+
+    def clearCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        self.beginRemoveRows(c.index(), 0, len(c.infos)-1)
+        c.infos = []
+        self.endRemoveRows()
 
     def searchableItems(self):
         return self.characters

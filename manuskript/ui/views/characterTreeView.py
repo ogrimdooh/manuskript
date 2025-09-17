@@ -204,6 +204,26 @@ class characterTreeView(QTreeWidget):
     def removeCharacterInfo(self):
         self._model.removeCharacterInfo(self.currentCharacterID())
 
+    def copyCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.copyCharacterInfo(ID, False)
+
+    def cutCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.copyCharacterInfo(ID, True)
+
+    def pasteCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.pasteCharacterInfo(ID)
+        
+    def pasteNotAddedCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.pasteNotAddedCharacterInfo(ID)
+
+    def clearCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.clearCharacterInfo(ID)
+
     def currentCharacterID(self):
         ID = None
         if self.currentItem():
