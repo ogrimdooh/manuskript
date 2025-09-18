@@ -1370,6 +1370,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.btnPersoClInfo.clicked.connect(self.lstCharacters.clearCharacterInfo, F.AUC)
             self.btnPersoPtInfo.clicked.connect(self.lstCharacters.pasteCharacterInfo, F.AUC)
             self.btnPersoEpInfo.clicked.connect(self.lstCharacters.pasteNotAddedCharacterInfo, F.AUC)
+            self.btnPersoUpInfo.clicked.connect(self.lstCharacters.moveUpCharacterInfo, F.AUC)
+            self.btnPersoDownInfo.clicked.connect(self.lstCharacters.moveDownCharacterInfo, F.AUC)
         except TypeError:
             # Connection has already been made
             pass

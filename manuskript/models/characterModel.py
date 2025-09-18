@@ -271,6 +271,40 @@ class characterModel(QAbstractItemModel, searchableModel):
         except:
             pass
 
+    def moveUpCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        index = -1
+        for idx in mainWindow().tblPersoInfos.selectedIndexes():
+            index = idx.row()
+            break
+
+        if len(c.infos) > 1 and index > 0:
+            self.beginRemoveRows(c.index(), index, index)
+            element = c.infos.pop(index)
+            self.endRemoveRows()
+            index = index - 1
+            self.beginInsertRows(c.index(), index, index)
+            c.infos.insert(index, element)
+            self.endInsertRows()
+
+    def moveDownCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        index = -1
+        for idx in mainWindow().tblPersoInfos.selectedIndexes():
+            index = idx.row()
+            break
+
+        if len(c.infos) > 1 and index >= 0 and index < len(c.infos) - 1:
+            self.beginRemoveRows(c.index(), index, index)
+            element = c.infos.pop(index)
+            self.endRemoveRows()
+            index = index + 1
+            self.beginInsertRows(c.index(), index, index)
+            c.infos.insert(index, element)
+            self.endInsertRows()
+
     def pasteNotAddedCharacterInfo(self, ID):
         c = self.getCharacterByID(ID)
 

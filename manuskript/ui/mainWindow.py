@@ -502,6 +502,21 @@ class Ui_MainWindow(object):
         self.btnPersoClInfo.setIcon(icon)
         self.btnPersoClInfo.setObjectName("btnPersoClInfo")
         self.horizontalLayout_9.addWidget(self.btnPersoClInfo)
+        
+        self.btnPersoUpInfo = QtWidgets.QPushButton(self.tab_12)
+        self.btnPersoUpInfo.setText("")
+        icon = QtGui.QIcon.fromTheme("go-up")
+        self.btnPersoUpInfo.setIcon(icon)
+        self.btnPersoUpInfo.setObjectName("btnPersoUpInfo")
+        self.horizontalLayout_9.addWidget(self.btnPersoUpInfo)
+
+        self.btnPersoDownInfo = QtWidgets.QPushButton(self.tab_12)
+        self.btnPersoDownInfo.setText("")
+        icon = QtGui.QIcon.fromTheme("go-down")
+        self.btnPersoDownInfo.setIcon(icon)
+        self.btnPersoDownInfo.setObjectName("btnPersoDownInfo")
+        self.horizontalLayout_9.addWidget(self.btnPersoDownInfo)
+
         self.lineEdit = QtWidgets.QLineEdit(self.tab_12)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_9.addWidget(self.lineEdit)
