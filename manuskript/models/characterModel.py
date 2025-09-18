@@ -271,6 +271,23 @@ class characterModel(QAbstractItemModel, searchableModel):
         except:
             pass
 
+    def moveFirstCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        index = -1
+        for idx in mainWindow().tblPersoInfos.selectedIndexes():
+            index = idx.row()
+            break
+
+        if len(c.infos) > 1 and index > 0:
+            self.beginRemoveRows(c.index(), index, index)
+            element = c.infos.pop(index)
+            self.endRemoveRows()
+            index = 0
+            self.beginInsertRows(c.index(), index, index)
+            c.infos.insert(index, element)
+            self.endInsertRows()
+
     def moveUpCharacterInfo(self, ID):
         c = self.getCharacterByID(ID)
 
@@ -304,6 +321,51 @@ class characterModel(QAbstractItemModel, searchableModel):
             self.beginInsertRows(c.index(), index, index)
             c.infos.insert(index, element)
             self.endInsertRows()
+
+    def moveLastCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        index = -1
+        for idx in mainWindow().tblPersoInfos.selectedIndexes():
+            index = idx.row()
+            break
+
+        if len(c.infos) > 1 and index >= 0 and index < len(c.infos) - 1:
+            self.beginRemoveRows(c.index(), index, index)
+            element = c.infos.pop(index)
+            self.endRemoveRows()
+            self.beginInsertRows(c.index(), len(c.infos), len(c.infos))
+            c.infos.append(element)
+            self.endInsertRows()
+
+    def pasteSortAndKeysCharacterInfo(self, ID):
+        c = self.getCharacterByID(ID)
+
+        try:
+            pastedInfos = eval(QApplication.clipboard().text())
+
+            info_old = c.infos
+
+            self.clearCharacterInfo(ID)
+
+            for description, value in pastedInfos:
+                valToUse = value
+                for idx in info_old:
+                    if idx.description == description:
+                        valToUse = idx.value
+                        break
+                self.addCharacterInfo(ID, description, valToUse)
+
+            for description, value in info_old:
+                addVal = True
+                for idx in c.infos:
+                    if idx.description == description:
+                        addVal = False
+                        break
+                if addVal:
+                    self.addCharacterInfo(ID, description, value)
+        except:
+            pass
 
     def pasteNotAddedCharacterInfo(self, ID):
         c = self.getCharacterByID(ID)

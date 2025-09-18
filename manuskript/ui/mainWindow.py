@@ -490,12 +490,21 @@ class Ui_MainWindow(object):
         self.btnPersoPtInfo.setIcon(icon)
         self.btnPersoPtInfo.setObjectName("btnPersoPtInfo")
         self.horizontalLayout_9.addWidget(self.btnPersoPtInfo)
+
         self.btnPersoEpInfo = QtWidgets.QPushButton(self.tab_12)
         self.btnPersoEpInfo.setText("")
-        icon = QtGui.QIcon.fromTheme("edit-redo")
+        icon = QtGui.QIcon.fromTheme("edit-paste-key")
         self.btnPersoEpInfo.setIcon(icon)
         self.btnPersoEpInfo.setObjectName("btnPersoEpInfo")
         self.horizontalLayout_9.addWidget(self.btnPersoEpInfo)
+
+        self.btnPersoSpInfo = QtWidgets.QPushButton(self.tab_12)
+        self.btnPersoSpInfo.setText("")
+        icon = QtGui.QIcon.fromTheme("edit-paste-sort")
+        self.btnPersoSpInfo.setIcon(icon)
+        self.btnPersoSpInfo.setObjectName("btnPersoSpInfo")
+        self.horizontalLayout_9.addWidget(self.btnPersoSpInfo)
+
         self.btnPersoClInfo = QtWidgets.QPushButton(self.tab_12)
         self.btnPersoClInfo.setText("")
         icon = QtGui.QIcon.fromTheme("edit-clear")
@@ -503,6 +512,13 @@ class Ui_MainWindow(object):
         self.btnPersoClInfo.setObjectName("btnPersoClInfo")
         self.horizontalLayout_9.addWidget(self.btnPersoClInfo)
         
+        self.btnPersoFirstInfo = QtWidgets.QPushButton(self.tab_12)
+        self.btnPersoFirstInfo.setText("")
+        icon = QtGui.QIcon.fromTheme("go-first")
+        self.btnPersoFirstInfo.setIcon(icon)
+        self.btnPersoFirstInfo.setObjectName("btnPersoFirstInfo")
+        self.horizontalLayout_9.addWidget(self.btnPersoFirstInfo)
+
         self.btnPersoUpInfo = QtWidgets.QPushButton(self.tab_12)
         self.btnPersoUpInfo.setText("")
         icon = QtGui.QIcon.fromTheme("go-up")
@@ -516,6 +532,13 @@ class Ui_MainWindow(object):
         self.btnPersoDownInfo.setIcon(icon)
         self.btnPersoDownInfo.setObjectName("btnPersoDownInfo")
         self.horizontalLayout_9.addWidget(self.btnPersoDownInfo)
+
+        self.btnPersoLastInfo = QtWidgets.QPushButton(self.tab_12)
+        self.btnPersoLastInfo.setText("")
+        icon = QtGui.QIcon.fromTheme("go-last")
+        self.btnPersoLastInfo.setIcon(icon)
+        self.btnPersoLastInfo.setObjectName("btnPersoLastInfo")
+        self.horizontalLayout_9.addWidget(self.btnPersoLastInfo)
 
         self.lineEdit = QtWidgets.QLineEdit(self.tab_12)
         self.lineEdit.setObjectName("lineEdit")

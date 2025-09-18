@@ -220,6 +220,14 @@ class characterTreeView(QTreeWidget):
         ID = self.currentCharacterID()
         self._model.pasteNotAddedCharacterInfo(ID)
 
+    def pasteSortAndKeysCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.pasteSortAndKeysCharacterInfo(ID)
+
+    def moveFirstCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.moveFirstCharacterInfo(ID)
+
     def moveUpCharacterInfo(self):
         ID = self.currentCharacterID()
         self._model.moveUpCharacterInfo(ID)
@@ -227,6 +235,10 @@ class characterTreeView(QTreeWidget):
     def moveDownCharacterInfo(self):
         ID = self.currentCharacterID()
         self._model.moveDownCharacterInfo(ID)
+
+    def moveLastCharacterInfo(self):
+        ID = self.currentCharacterID()
+        self._model.moveLastCharacterInfo(ID)
 
     def clearCharacterInfo(self):
         ID = self.currentCharacterID()
