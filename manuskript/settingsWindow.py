@@ -41,6 +41,7 @@ class settingsWindow(QWidget, Ui_Settings):
                   self.lblTitleStatus,
                   self.lblTitleFullscreen,
                   self.lblTitleStyle,
+                  self.lblTitleCharacter,
                   ]:
             l.setStyleSheet(S.titleLabelSS())
 
@@ -50,7 +51,8 @@ class settingsWindow(QWidget, Ui_Settings):
                  themeIcon("label"),
                  themeIcon("status"),
                  QIcon.fromTheme("preferences-desktop-theme"),
-                 QIcon.fromTheme("color-picker")
+                 QIcon.fromTheme("color-picker"),
+                 QIcon.fromTheme("emblem-people")
                 ]
         for i in range(self.lstMenu.count()):
             item = self.lstMenu.item(i)
@@ -321,6 +323,21 @@ class settingsWindow(QWidget, Ui_Settings):
         self.btnTooltipBorderColor.clicked.connect(self.chooseTooltipBorderColor)
         self.updateTooltipControlsState()
 
+        # Character - Custom Info Titles
+        self.txtCharInfoTitles_Motivation.setText(settings.characters["customInfoTitles"].get("Motivation", ""))
+        self.txtCharInfoTitles_Goal.setText(settings.characters["customInfoTitles"].get("Goal", ""))
+        self.txtCharInfoTitles_Conflict.setText(settings.characters["customInfoTitles"].get("Conflict", ""))
+        self.txtCharInfoTitles_Epiphany.setText(settings.characters["customInfoTitles"].get("Epiphany", ""))
+        self.txtCharInfoTitles_Summary01.setText(settings.characters["customInfoTitles"].get("Summary01", ""))
+        self.txtCharInfoTitles_Summary02.setText(settings.characters["customInfoTitles"].get("Summary02", ""))
+        
+        self.txtCharInfoTitles_Motivation.textEdited.connect(self.saveSettingsChanged)
+        self.txtCharInfoTitles_Goal.textEdited.connect(self.saveSettingsChanged)
+        self.txtCharInfoTitles_Conflict.textEdited.connect(self.saveSettingsChanged)
+        self.txtCharInfoTitles_Epiphany.textEdited.connect(self.saveSettingsChanged)
+        self.txtCharInfoTitles_Summary01.textEdited.connect(self.saveSettingsChanged)
+        self.txtCharInfoTitles_Summary02.textEdited.connect(self.saveSettingsChanged)
+
     def setTab(self, tab):
 
         tabs = {
@@ -330,6 +347,7 @@ class settingsWindow(QWidget, Ui_Settings):
             "Status": 3,
             "Fullscreen": 4,
             "Style": 5,
+            "Characters": 6,
         }
 
         if tab in tabs:
@@ -388,6 +406,13 @@ class settingsWindow(QWidget, Ui_Settings):
         settings.autoSaveNoChangesDelay = int(self.txtAutoSaveNoChanges.text())
         self.mw.saveTimer.setInterval(settings.autoSaveDelay * 60 * 1000)
         self.mw.saveTimerNoChanges.setInterval(settings.autoSaveNoChangesDelay * 1000)
+
+        settings.characters["customInfoTitles"]["Motivation"] = self.txtCharInfoTitles_Motivation.text()
+        settings.characters["customInfoTitles"]["Goal"] = self.txtCharInfoTitles_Goal.text()
+        settings.characters["customInfoTitles"]["Conflict"] = self.txtCharInfoTitles_Conflict.text()
+        settings.characters["customInfoTitles"]["Epiphany"] = self.txtCharInfoTitles_Epiphany.text()
+        settings.characters["customInfoTitles"]["Summary01"] = self.txtCharInfoTitles_Summary01.text()
+        settings.characters["customInfoTitles"]["Summary02"] = self.txtCharInfoTitles_Summary02.text()
 
     ####################################################################################################
     #                                           REVISION                                               #

@@ -4,6 +4,7 @@ import importlib
 import os
 import re
 
+from PyQt5 import QtCore
 from PyQt5.Qt import qVersion, PYQT_VERSION_STR
 from PyQt5.QtCore import (pyqtSignal, QSignalMapper, QTimer, QSettings, Qt, QPoint,
                           QRegExp, QUrl, QSize, QModelIndex)
@@ -1239,6 +1240,38 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             LOGGER.info("Project {} loaded.".format(project))
             F.statusMessage(
                     self.tr("Project {} loaded.").format(project), 2000)
+            
+            _translate = QtCore.QCoreApplication.translate
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Motivation"]:
+                self.label_4.setText(settings.characters["customInfoTitles"]["Motivation"])
+            else:
+                self.label_4.setText(_translate("MainWindow", "Motivation"))
+
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Goal"]:
+                self.label_5.setText(settings.characters["customInfoTitles"]["Goal"])
+            else:
+                self.label_5.setText(_translate("MainWindow", "Goal"))
+
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Conflict"]:
+                self.label_6.setText(settings.characters["customInfoTitles"]["Conflict"])
+            else:
+                self.label_6.setText(_translate("MainWindow", "Conflict"))
+
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Epiphany"]:
+                self.label_7.setText(settings.characters["customInfoTitles"]["Epiphany"])
+            else:
+                self.label_7.setText(_translate("MainWindow", "Epiphany"))
+                
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Summary01"]:
+                self.label_24.setText(settings.characters["customInfoTitles"]["Summary01"])
+            else:
+                self.label_24.setText(_translate("MainWindow", "<html><head/><body><p align=\"right\">One sentence<br/>summary</p></body></html>"))
+
+            if settings.characters["customInfoTitles"] and settings.characters["customInfoTitles"]["Summary02"]:
+                self.label_8.setText(settings.characters["customInfoTitles"]["Summary02"])
+            else:
+                self.label_8.setText(_translate("MainWindow", "<html><head/><body><p align=\"right\">One paragraph<br/>summary</p></body></html>"))
+
         else:
             LOGGER.error("Project {} loaded with some errors:".format(project))
             for e in errors:

@@ -114,6 +114,17 @@ tooltipStyle = {
     "borderColor": "#767676"
 }
 
+characters = {
+    "customInfoTitles": {
+        "Motivation": "",
+        "Goal": "",
+        "Conflict": "",
+        "Epiphany": "",
+        "Summary01": "",
+        "Summary02": "",
+    }
+}
+
 viewMode = "fiction"  # simple, fiction
 saveToZip = False
 dontShowDeleteWarning = False
@@ -144,7 +155,7 @@ def save(filename=None, protocol=None):
     global spellcheck, dict, corkSliderFactor, viewSettings, corkSizeFactor, folderView, lastTab, openIndexes, \
            progressChars, autoSave, autoSaveDelay, saveOnQuit, autoSaveNoChanges, autoSaveNoChangesDelay, outlineViewColumns, \
            corkBackground, corkStyle, fullScreenTheme, defaultTextType, textEditor, revisions, frequencyAnalyzer, viewMode, \
-           saveToZip, dontShowDeleteWarning, fullscreenSettings, tooltipStyle
+           saveToZip, dontShowDeleteWarning, fullscreenSettings, tooltipStyle, characters
 
     allSettings = {
         "viewSettings": viewSettings,
@@ -175,6 +186,7 @@ def save(filename=None, protocol=None):
         "saveToZip": saveToZip,
         "dontShowDeleteWarning": dontShowDeleteWarning,
         "tooltipStyle": tooltipStyle,
+        "characters": characters,
     }
 
     #pp=pprint.PrettyPrinter(indent=4, compact=False)
@@ -355,3 +367,18 @@ def load(string, fromString=False, protocol=None):
         if "useSystemDefaultsForTooltips" not in loaded_tooltip_style:
             loaded_tooltip_style["useSystemDefaultsForTooltips"] = True
         tooltipStyle = loaded_tooltip_style
+
+    if "characters" in allSettings:
+        global characters
+        loaded_characters = allSettings["characters"]
+        # Add missing keys with defaults
+        if "customInfoTitles" not in loaded_characters:
+            loaded_characters["customInfoTitles"] = {
+                "Motivation": "",
+                "Goal": "",
+                "Conflict": "",
+                "Epiphany": "",
+                "Summary01": "",
+                "Summary02": "",
+            }
+        characters = loaded_characters
